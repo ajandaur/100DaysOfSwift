@@ -1,4 +1,4 @@
-# Project 1: WeSplit
+# Project 1: Storm Viewer
 Hacking With SwiftUI by Paul Hudson
 
 # Preview 
