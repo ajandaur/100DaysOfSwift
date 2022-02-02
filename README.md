@@ -17,4 +17,4 @@ Projects / Topics                                                               
 | --- | 
 [Project 1](Project1) - *StormViewer* <br/>(with challenges)                                         <br/><sub> table views, image views, app bundles, FileManager, typecasting, viewcontrollers, storyboards, outlets, Auto Layout, UIImage </sub> | |
 [Project 2](Project2) - *Guess The Flag* <br/>(with challenges)                                         <br/><sub> asset catalogs, UIButton, CALayer, UIColor, random numbers, actions, UIAlertController </sub> | |
-[Project 2](Project3) - *Guess The Flag* <br/>(with challenges)                                         <br/><sub> UIBarButtonItem,  UIActivityViewController </sub> | |
+[Project 3](Project3) - *Technique Project 1* <br/>(with challenges)                                         <br/><sub> UIBarButtonItem,  UIActivityViewController </sub> | |
