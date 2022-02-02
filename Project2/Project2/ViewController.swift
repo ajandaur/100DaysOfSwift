@@ -38,6 +38,17 @@ class ViewController: UIViewController {
         button1.layer.borderColor = UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0).cgColor
         button2.layer.borderColor = UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0).cgColor
         button3.layer.borderColor = UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0).cgColor
+        
+        // add bar button that shows their scores when tapped
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Score", style: .plain, target: self, action: #selector(showScore))
+    }
+    
+    // objc method to showScore as .actionSheet
+    @objc func showScore() {
+        let scoreAlert = UIAlertController(title: "SCORE", message: nil, preferredStyle: .alert)
+        scoreAlert.addAction(UIAlertAction(title: "Your current score is \(score)", style: .default, handler: nil))
+        
+        present(scoreAlert, animated: true)
     }
     
     // method to show three random flag images on the screen
@@ -50,7 +61,7 @@ class ViewController: UIViewController {
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         
         correctAnswer = Int.random(in: 0...2)
-        title = "Score: \(score) - Tap on: \(countries[correctAnswer].uppercased())'s flag"
+        title = "\(countries[correctAnswer].uppercased())'s flag"
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
