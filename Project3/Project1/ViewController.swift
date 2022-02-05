@@ -16,9 +16,12 @@ class ViewController: UITableViewController {
 
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
-
+        
+        // loading those NSSL JPEGs was done by scanning the app bundle using the FileManager class, which lets you read and write to the iOS filesystem
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
+        
+        // The fm was a reference to FileManager and path was a reference to the resource path from Bundle, so this line pulls out an array of files at the directory where our app’s resources lived.
         let items = try! fm.contentsOfDirectory(atPath: path)
         
         // CHALLENGE: Sort array of pictures so that file numbers are in order
