@@ -36,6 +36,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // That creates a new constant called cell by dequeuing a recycled cell from the table. We have to give it the identifier of the cell type we want to recycle, so we enter the same name we gave Interface Builder: “Picture”.
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+        
         cell.textLabel?.text = pictures[indexPath.row]
         return cell
     }
