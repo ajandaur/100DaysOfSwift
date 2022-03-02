@@ -6,7 +6,7 @@ This is my repo full of projects from the course, 100 Days Of Swift Challenge by
 
 Type               | Number  | Completion
 :---               |  :---:  |   :---:
-Projects + Challenges           |  4 / 30 | 13.3%
+Projects + Challenges           |  5 / 30 | 16.6%
 Milestone Projects |  1 / 10 | 10%
 Final Exam         |  0 / 1  | 0%
 
@@ -20,5 +20,6 @@ Projects / Topics                                                               
 [Project 3](Project3) - *Technique Project 1* <br/>(with challenges)                                         <br/><sub> UIBarButtonItem,  UIActivityViewController </sub> | |
 [Milestone 1](Milestone1) - *Storm Chooser* <br/>                                        | |
 [Project 4](Project4) - *Easy Browser* <br/>(with challenges)                                         <br/><sub> loadView(), WKWebView, delegation, URL, URLRequest, UIToolbar, UIProgressView, KVO  </sub> | |
+[Project 5](Project4) - *Word Scramble* <br/>(with challenges)                                         <br/><sub> loadView(), UITableView, UIAlertController, NSRange, Swift strings, closures  </sub> | |
 
 
