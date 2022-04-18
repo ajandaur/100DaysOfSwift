@@ -20,6 +20,7 @@ Projects / Topics                                                               
 [Project 3](Project3) - *Technique Project 1* <br/>(with challenges)                                         <br/><sub> UIBarButtonItem,  UIActivityViewController </sub> | |
 [Milestone 1](Milestone1) - *Storm Chooser* <br/>                                        | |
 [Project 4](Project4) - *Easy Browser* <br/>(with challenges)                                         <br/><sub> loadView(), WKWebView, delegation, URL, URLRequest, UIToolbar, UIProgressView, KVO  </sub> | |
-[Project 5](Project4) - *Word Scramble* <br/>(with challenges)                                         <br/><sub> loadView(), UITableView, UIAlertController, NSRange, Swift strings, closures  </sub> | |
+[Project 5](Project5) - *Word Scramble* <br/>(with challenges)                                         <br/><sub> loadView(), UITableView, UIAlertController, NSRange, Swift strings, closures  </sub> | |
+[Project 6](Project6a) - *Auto Layout* <br/>(with challenges)                                         <br/><sub> Visual Format Language, Auto Layout  </sub> | |
 
 
