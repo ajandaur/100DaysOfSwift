@@ -33,7 +33,7 @@ class ViewController: UITableViewController {
     }
     
     // Because we are calling this f(x) from a UIBarButtonItem -> We MUST MARK IT AS @objc
-    // This is because it is connected to objective-C code!!
+    // This is because it is connected to objective-C code!
     @objc func promptForAnswer() {
         // Created a UIAletControllerz
         let ac = UIAlertController(title: "Enter answer", message: nil, preferredStyle: .alert)
@@ -75,7 +75,7 @@ class ViewController: UITableViewController {
                     
                     return
                 } else {
-                    showErrorMessage(title: "Word not recognised", message: "You can't just make them up, you know!")
+                    showErrorMessage(title: "Word not recognised", message: "Word isn't real or is too short!")
                 }
             } else {
                 showErrorMessage(title: "Word used already", message: "Be more original")
@@ -113,7 +113,7 @@ class ViewController: UITableViewController {
     
     //  It needs to check whether the word has been used already, because obviously we don't want duplicate words.
     func isOriginal(word: String) -> Bool {
-        // CHALLENGE 1: disallow answrs that are the start word
+        // disallow answers that are the start word
         guard word != title else { return false }
         // return true if the word is not already in the usedWords array
         return !usedWords.contains(word)
@@ -121,7 +121,7 @@ class ViewController: UITableViewController {
     // It also needs to check whether the word is actually a valid English word, because otherwise the user can just type in nonsense.
     func isReal(word: String) -> Bool {
         
-        // CHALLENGE 1: If word length is less than three letters return false
+        //  If word length is less than three letters return false
         guard word.count > 3 else { return false }
         
         let checker = UITextChecker()
@@ -134,7 +134,7 @@ class ViewController: UITableViewController {
     
     
     
-    // CHALLENGE 3: Add a left bar button item that calls startGame(), so users can restart with a new word whenever they want to.
+    //  Add a left bar button item that calls startGame(), so users can restart with a new word whenever they want to.
     @objc func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
