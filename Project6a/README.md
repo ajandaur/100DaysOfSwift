@@ -1,2 +1,2 @@
-# Project 1: Guess-The-Flag
-<img src="https://github.com/ajandaur/100DaysOfSwift/blob/4770a2083d0c4cc27448e907c3fdc1e6f112b1a9/Project2/Demo/demo.png" width="500">
+# Project 6: Auto Layout
+<img src="https://github.com/ajandaur/100DaysOfSwift/blob/57b3aeacdb12269218008478fd6c74b61ce07e91/Project6a/demo.png" width="500">
