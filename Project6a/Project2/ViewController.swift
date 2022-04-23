@@ -75,7 +75,7 @@ class ViewController: UIViewController {
             // adjust the player's score up or down
             score += 1
         } else {
-            title = "Wrong! That's te flag of \(countries[sender.tag].uppercased())'s flag"
+            title = "Wrong! That's the flag of \(countries[sender.tag].uppercased())'s flag"
             score -= 1
         }
         
