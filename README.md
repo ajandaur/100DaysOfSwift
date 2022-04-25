@@ -6,7 +6,7 @@ This is my repo full of projects from the course, 100 Days Of Swift Challenge by
 
 Type               | Number  | Completion
 :---               |  :---:  |   :---:
-Projects + Challenges           |  7 / 30 | 23%
+Projects + Challenges           |  8 / 30 | 26%
 Milestone Projects |  2 / 10 | 20%
 Final Exam         |  0 / 1  | 0%
 
@@ -24,5 +24,9 @@ Projects / Topics                                                               
 [Project 6](Project6a) - *Auto Layout* <br/>(with challenges)                                         <br/><sub> Visual Format Language, Auto Layout  </sub> | |
 [Milestone 2](Milestone2) - *Shopping List* <br/>                                        | |
 [Project 7](Project7) - *Whitehouse Petitions* <br/>(with challenges)                                         <br/><sub> JSON, UITabBarController, UIStoryboard, Codable  </sub> | |
+[Project 8](Project8) - *Swifty Words* <br/>(with challenges)                                         <br/><sub> addTarget(), enumerated(), joined(), replacingOccurrences(), programmatic UI  </sub> | |
+
+
+
 
 
