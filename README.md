@@ -25,7 +25,7 @@ Projects / Topics                                                               
 [Milestone 2](Milestone2) - *Shopping List* <br/>                                        | |
 [Project 7](Project7) - *Whitehouse Petitions* <br/>(with challenges)                                         <br/><sub> JSON, UITabBarController, UIStoryboard, Codable  </sub> | |
 [Project 8](Project8) - *Swifty Words* <br/>(with challenges)                                         <br/><sub> addTarget(), enumerated(), joined(), replacingOccurrences(), programmatic UI  </sub> | |
-[Project 9](Project9) - *Swifty Words* <br/>(with challenges)                                         <br/><sub> Grand Central Dispatch, quality of service queues, performSelector()  </sub> | |
+[Project 9](Project9) - *Grand Central Dispatch* <br/>(with challenges)                                         <br/><sub> Grand Central Dispatch, quality of service queues, performSelector()  </sub> | |
 
 
 
