@@ -17,8 +17,16 @@ class ViewController: UITableViewController {
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
 
+        performSelector(inBackground: #selector(loadPictures), with: nil)
+        tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+
+    }
+    
+    @objc func loadPictures() {
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
+        
+        
         let items = try! fm.contentsOfDirectory(atPath: path)
         
         // CHALLENGE: Sort array of pictures so that file numbers are in order

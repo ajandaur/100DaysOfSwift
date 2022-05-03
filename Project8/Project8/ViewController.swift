@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     // one to store the buttons that are currently being used to spell an answer, and one for all the possible solutions.
     var activatedButtons = [UIButton]()
     var solutions = [String]()
-
+    
     // We also need two integers: one to hold the player's score, which will start at 0 but obviously change during play, and one to hold the current level.
     var score = 0 {
         didSet {
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
         buttonsView.layer.borderColor = UIColor.lightGray.cgColor
         
         
-
+        
         
         
         // Layout constraints
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
             submit.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100),
             // We’re going to force both buttons to have a height of 44 points. iOS likes to make its buttons really small by default, but at the same time Apple’s human interface guidelines recommends buttons be at least 44x44 so they can be tapped easily.
             submit.heightAnchor.constraint(equalToConstant: 44),
-
+            
             
             clear.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100),
             clear.centerYAnchor.constraint(equalTo: submit.centerYAnchor),
@@ -185,18 +185,19 @@ class ViewController: UIViewController {
                 
                 // we want all the letter buttons to call letterTapped() when they are tapped
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
-
+                
                 
             }
         }
-
+        
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        loadLevel()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.loadLevel()
+        }
     }
     
     func loadLevel() {
@@ -226,17 +227,24 @@ class ViewController: UIViewController {
             }
         }
         
-        // Now configure the buttons and labels
-        cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
-        answerLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         letterBits.shuffle()
         
-        if letterBits.count == letterButtons.count {
-            for i in 0 ..< letterButtons.count {
-                letterButtons[i].setTitle(letterBits[i], for: .normal)
+        DispatchQueue.main.async { [weak self] in
+            // Now configure the buttons and labels
+            self?.cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+            self?.answerLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if let letterButtons = self?.letterButtons {
+                if letterBits.count == self?.letterButtons.count {
+                    for i in 0 ..< letterButtons.count {
+                        letterButtons[i].setTitle(letterBits[i], for: .normal)
+                    }
+                }
             }
+            
         }
+        
+        
     }
     
     @objc func letterTapped(_ sender: UIButton) {
@@ -292,7 +300,7 @@ class ViewController: UIViewController {
             }
             self.activatedButtons.removeAll()
         })
-                     
+        
         present(ac, animated: true)
     }
     
@@ -300,7 +308,10 @@ class ViewController: UIViewController {
         level += 1
         solutions.removeAll(keepingCapacity: true)
         
-        loadLevel()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.loadLevel()
+        }
+    
         
         for button in letterButtons {
             button.isHidden = false
@@ -317,7 +328,7 @@ class ViewController: UIViewController {
         
         activatedButtons.removeAll()
     }
-
-
+    
+    
 }
 
