@@ -110,6 +110,8 @@ class ViewController: UIViewController {
     
     func loadWord() {
         
+        
+        
         if let wordsURL = Bundle.main.url(forResource: "words", withExtension: "txt") {
             if let allWords = try? String(contentsOf: wordsURL) {
                 words = allWords.components(separatedBy: "\n")
