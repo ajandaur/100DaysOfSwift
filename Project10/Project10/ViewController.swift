@@ -21,6 +21,16 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     @objc func addNewPerson() {
         let picker = UIImagePickerController()
         picker.allowsEditing = true
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            if let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: .camera) {
+                picker.mediaTypes = availableMediaTypes
+                picker.sourceType = .camera
+            }
+        } else {
+            picker.sourceType = .photoLibrary
+        }
+        
         picker.delegate = self
         present(picker, animated: true)
     }
@@ -54,20 +64,37 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let person = people[indexPath.item]
+        
+        if person.name == "Unknown" {
+            let ac = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
+            ac.addTextField()
 
-        let ac = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
-        ac.addTextField()
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak ac] _ in
+                guard let newName = ac?.textFields?[0].text else { return }
+                person.name = newName
 
-        ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak ac] _ in
-            guard let newName = ac?.textFields?[0].text else { return }
-            person.name = newName
+                self?.collectionView.reloadData()
+            })
 
-            self?.collectionView.reloadData()
-        })
+            present(ac, animated: true)
+        } else {
+            let deleteAC = UIAlertController(title: "Delete person", message:
+                                                "Would you like to delete this person?", preferredStyle: .alert)
 
-        present(ac, animated: true)
+            deleteAC.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+            deleteAC.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self, weak deleteAC] _ in
+                self?.people.remove(at: indexPath.item)
+
+                self?.collectionView.reloadData()
+            })
+            
+            present(deleteAC, animated: true)
+        }
+
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
