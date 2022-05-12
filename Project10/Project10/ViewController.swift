@@ -85,7 +85,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 
             deleteAC.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
-            deleteAC.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self, weak deleteAC] _ in
+            deleteAC.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
                 self?.people.remove(at: indexPath.item)
 
                 self?.collectionView.reloadData()
