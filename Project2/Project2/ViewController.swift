@@ -16,18 +16,19 @@ class ViewController: UIViewController {
     
     var correctAnswer = 0
     var score = 0
+    var highScore = 0
+    
     
     // CHALLENGE: Keep track of how many questions have been asked, and show one final alert controller after they have answered 10. This should show their final score.
     
     var questionsAsked = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
-        askQuestion(action: nil)
         // access CALayer of button to change border width
         button1.layer.borderWidth = 1
         button2.layer.borderWidth = 1
@@ -41,6 +42,35 @@ class ViewController: UIViewController {
         
         // add bar button that shows their scores when tapped
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Score", style: .plain, target: self, action: #selector(showScore))
+        
+        let defaults = UserDefaults.standard
+        
+        if let highScore = defaults.value(forKey: "highScore") as? Int {
+            self.highScore = highScore
+            print("Loaded high score. It is \(highScore)")
+        } else {
+            print("Failed to load high score")
+        }
+        
+        askQuestion(action: nil)
+    }
+    
+    func save() {
+        let defaults = UserDefaults.standard
+        
+        do {
+            defaults.set(highScore, forKey: "highScore")
+            print("Successfully saved score!")
+        } catch {
+            print("Failed to save high score")
+        }
+    }
+    
+    func startNewGame(action: UIAlertAction) {
+        score = 0
+        questionsAsked = 0
+        
+        askQuestion(action: nil)
     }
     
     // objc method to showScore as .actionSheet
@@ -87,6 +117,16 @@ class ViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
             present(ac, animated: true)
         } else {
+            
+            if score > highScore {
+                highScore = score
+                save()
+                let highScoreAC = UIAlertController(title: "Game over! New high score though.", message: "Your score is \(score).", preferredStyle: .alert)
+                highScoreAC.addAction(UIAlertAction(title: "Start new game!", style: .default, handler: startNewGame))
+                present(highScoreAC, animated: true)
+            }
+            
+            
             let finalAC = UIAlertController(title: "Game Over!", message: "Your total score was \(score)", preferredStyle: .alert)
             finalAC.addAction(UIAlertAction(title: "Play again?", style: .default, handler: askQuestion))
             present(finalAC, animated: true)
@@ -97,6 +137,6 @@ class ViewController: UIViewController {
         
     }
     
-
+    
 }
 

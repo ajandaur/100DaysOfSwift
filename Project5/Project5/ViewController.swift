@@ -11,6 +11,7 @@ class ViewController: UITableViewController {
     
     var allWords = [String]()
     var usedWords = [String]()
+    var currentWord: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,16 @@ class ViewController: UITableViewController {
             allWords = ["silkworm"]
         }
         
-        startGame()
+        let defaults = UserDefaults.standard
+        
+        if let savedCurrentWord = defaults.object(forKey: "savedCurrentWord") as? String, let savedUsedWords = defaults.object(forKey: "savedUsedWords") as? [String] {
+            title = savedCurrentWord
+            currentWord = savedCurrentWord
+            usedWords = savedUsedWords
+        } else {
+            startGame()
+        }
+      
     }
     
     // Because we are calling this f(x) from a UIBarButtonItem -> We MUST MARK IT AS @objc
@@ -70,13 +80,15 @@ class ViewController: UITableViewController {
                     //  insert the new word into our usedWords array at index 0
                     usedWords.insert(lowerAnswer, at: 0)
                     
+                    save()
+                    
                     let indexPath = IndexPath(row: 0, section: 0)
                     // using insertRows() lets us tell the table view that a new row has been placed at a specific place in the array so that it can animate the new cell appearing
                     tableView.insertRows(at: [indexPath], with: .automatic)
                     
                     return
                 } else {
-                    showErrorMessage(title: "Word not recognised", message: "Word isn't real or is too short!")
+                    showErrorMessage(title: "Word not recognized", message: "Word isn't real or is too short!")
                 }
             } else {
                 showErrorMessage(title: "Word used already", message: "Be more original")
@@ -138,9 +150,17 @@ class ViewController: UITableViewController {
     //  Add a left bar button item that calls startGame(), so users can restart with a new word whenever they want to.
     @objc func startGame() {
         title = allWords.randomElement()
+        currentWord = title
         usedWords.removeAll(keepingCapacity: true)
+        save()
         tableView.reloadData()
     }
+    
+    func save() {
+            let defaults = UserDefaults.standard
+            defaults.set(currentWord, forKey: "savedCurrentWord")
+            defaults.set(usedWords, forKey: "savedUsedWords")
+        }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usedWords.count

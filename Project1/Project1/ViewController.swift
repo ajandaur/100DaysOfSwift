@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UITableViewController {
     var pictures = [String]()
+    
+    var pictureDict = [String: Int]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,17 @@ class ViewController: UITableViewController {
         performSelector(inBackground: #selector(loadPictures), with: nil)
         tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
 
+    }
+    
+    func save()  {
+        let jsonEncoder = JSONEncoder()
+        if let savedData = try? jsonEncoder.encode(pictureDict), let savedPictures = try? jsonEncoder.encode(pictures) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "pictDict")
+            defaults.set(savedPictures, forKey: "pictures")
+        } else {
+            print("Failed to save pictures")
+        }
     }
     
     @objc func loadPictures() {
@@ -33,6 +46,7 @@ class ViewController: UITableViewController {
         for item in items.sorted() {
             if item.hasPrefix("nssl") {
                 pictures.append(item)
+                pictureDict[item] = 0
             }
         }
     }
@@ -45,13 +59,16 @@ class ViewController: UITableViewController {
         // That creates a new constant called cell by dequeuing a recycled cell from the table. We have to give it the identifier of the cell type we want to recycle, so we enter the same name we gave Interface Builder: “Picture”.
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         
-        cell.textLabel?.text = pictures[indexPath.row]
+        let picture = pictures[indexPath.row]
+        cell.textLabel?.text = picture
+        cell.detailTextLabel?.text = "Viewed \(pictureDict[picture]!)"
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+
             // 2: success! Set its selectedImage property
             vc.selectedImage = pictures[indexPath.row]
             
@@ -63,5 +80,11 @@ class ViewController: UITableViewController {
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)
         }
+        
+        // increment the # of times the picture is being viewed
+        let picture = pictures[indexPath.row]
+        pictureDict[picture]! += 1
+        save()
+        tableView.reloadData()
     }
 }
