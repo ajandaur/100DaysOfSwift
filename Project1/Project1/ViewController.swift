@@ -56,14 +56,34 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // That creates a new constant called cell by dequeuing a recycled cell from the table. We have to give it the identifier of the cell type we want to recycle, so we enter the same name we gave Interface Builder: “Picture”.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        
-        let picture = pictures[indexPath.row]
-        cell.textLabel?.text = picture
-        cell.detailTextLabel?.text = "Viewed \(pictureDict[picture]!)"
-        return cell
-    }
+
+            guard let rows = tableView.dequeueReusableCell(withIdentifier: "cellPicture", for: indexPath) as? CaptionedPhoto else{
+                fatalError("something went wrong with deque")
+            }
+
+            let person = pictures[indexPath.row]
+            let path = getDocumentsDirectory().appendingPathComponent(person.photo)
+            rows.imageView?.image = UIImage(contentsOfFile: path.path)
+
+            //either go here
+    //        rows.caption.text = person.caption
+
+            let ac = UIAlertController(title: "Add captions to this photo", message: nil, preferredStyle: .alert)
+            ac.addTextField()
+
+            ac.addAction(UIAlertAction(title: "cancel", style: .cancel))
+            ac.addAction(UIAlertAction(title: "add", style: .default) {[weak self, weak ac] _ in
+                guard let newLabel = ac?.textFields?[0].text else{ return }
+                person.caption = newLabel
+                self?.tableView.reloadData()
+            }
+
+            )
+            present(ac, animated: true)
+
+            rows.caption.text = person.caption
+            return rows
+        }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
