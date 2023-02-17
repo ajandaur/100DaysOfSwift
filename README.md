@@ -7,7 +7,7 @@ This is my repo full of projects from the course, 100 Days Of Swift Challenge by
 Type               | Number  | Completion
 :---               |  :---:  |   :---:
 Projects + Challenges           |  9 / 30 | 30%
-Milestone Projects |  2 / 10 | 20%
+Milestone Projects |  4 / 10 | 40%
 Final Exam         |  0 / 1  | 0%
 
 
@@ -26,6 +26,7 @@ Projects / Topics                                                               
 [Project 7](Project7) - *Whitehouse Petitions* <br/>(with challenges)                                         <br/><sub> JSON, UITabBarController, UIStoryboard, Codable  </sub> | |
 [Project 8](Project8) - *Swifty Words* <br/>(with challenges)                                         <br/><sub> addTarget(), enumerated(), joined(), replacingOccurrences(), programmatic UI  </sub> | |
 [Project 9](Project9) - *Grand Central Dispatch* <br/>(with challenges)                                         <br/><sub> Grand Central Dispatch, quality of service queues, performSelector()  </sub> | |
+[Milestone 4](Milestone4) - *Interesting Photos* <br/>                                        | |
 
 
 
